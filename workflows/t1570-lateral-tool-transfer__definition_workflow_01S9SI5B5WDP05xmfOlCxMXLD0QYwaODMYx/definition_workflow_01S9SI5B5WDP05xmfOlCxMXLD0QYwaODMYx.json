@@ -1,0 +1,1576 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx",
+    "name": "T1570 Lateral Tool Transfer",
+    "title": "T1570 Lateral Tool Transfer",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": [
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "Whitelisted",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SA7O1WAEY7K2MDPLjNey1fezKout8E9fA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "2",
+          "scope": "input",
+          "name": "Max Duplicates",
+          "type": "datatype.string",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SA3BVEP6PP42Z2Aosh3FKKmxwy2FkwRyf",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Posting T1570 Lateral Tool Transfer details:\\n",
+          "scope": "output",
+          "name": "Markdown",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SBN5PEOIAG90NGKBkbp1hB88mPiL8HEhW",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.boolean",
+        "properties": {
+          "value": false,
+          "scope": "local",
+          "name": "Send Message?",
+          "type": "datatype.boolean",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SC0RCZ661DN6Igl4p995BUlp6luZEz3l0",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.secure_string",
+        "properties": {
+          "value": "*****",
+          "scope": "local",
+          "name": "Bot Token",
+          "type": "datatype.secure_string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SAUQ2WXCCJC1IJ2XpNpzeL5UKTYrWjudD",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "tabletype_01SA46CB2UUIS30ShEL1B74BT0Aj3IMUHwm",
+        "properties": {
+          "scope": "output",
+          "name": "Potential Lateral Tool Transfers",
+          "type": "datatype.table",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SA7V728O7XL2qGQlYgLKeC5q7J6z3UDxA",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "{}",
+          "scope": "output",
+          "name": "Result",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SA2YH1JYNAG71hyDwc1hCAWmFSyktc1Gc",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "Y2lzY29zcGFyazovL3VybjpURUFNOnVzLXdlc3QtMl9yL1JPT00vODc4YTIwODAtMzRlZS0xMWVjLWEwOGYtYzdiYTQ4NzFlM2Y2",
+          "scope": "local",
+          "name": "Webex Room ID",
+          "type": "datatype.string",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SAVC9N3UY3G3qpGOgPym86C6isZPuS62D",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "",
+          "scope": "local",
+          "name": "unused",
+          "type": "datatype.string",
+          "description": "This variable is here so that it can be set by a Set Variables activity, making them comment blocks basically.\n\nIt should never be read!",
+          "is_required": false,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01SBZYTY6P1I01P4JmtGCTMCdlEn4ZoOGAh",
+        "object_type": "variable_workflow"
+      },
+      {
+        "schema_id": "datatype.string",
+        "properties": {
+          "value": "b9f5c51b-c9a2-4f94-a273-1d94bcdbf707",
+          "scope": "input",
+          "name": "AMP Group GUID",
+          "type": "datatype.string",
+          "description": "Find out the GUID at the AMP API /v1/groups",
+          "is_required": true,
+          "is_invisible": false
+        },
+        "unique_name": "variable_workflow_01S9WP5X5QHCS1ItEaSu70uOX528bTwWHqA",
+        "object_type": "variable_workflow"
+      }
+    ],
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "T1570 Lateral Tool Transfer",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01SA28AOOGFGW2Mi5BOcDV8UOq0MT97KFpM",
+        "name": "HTTP Request",
+        "title": "Get AMP Computers",
+        "type": "web-service.http_request",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "allow_auto_redirect": true,
+          "continue_on_error_status_code": false,
+          "continue_on_failure": false,
+          "display_name": "Get AMP Computers",
+          "method": "GET",
+          "relative_url": "computers",
+          "runtime_user": {
+            "target_default": true
+          },
+          "skip_execution": false,
+          "target": {
+            "override_workflow_target": true,
+            "target_id": "definition_target_01S9WJLG94O1A0HkwcNgLRoEkbShHGfAJdP"
+          }
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01SA2O8BVN3JO29PhfRukUGV0RZrs227q8K",
+        "name": "Read Table from JSON",
+        "title": "Read Hostnames",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Read Hostnames",
+          "input_json": "$activity.definition_activity_01SA28AOOGFGW2Mi5BOcDV8UOq0MT97KFpM.output.response_body$",
+          "jsonpath_query": "$.data[?(@.group_guid =~ /$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.input.variable_workflow_01S9WP5X5QHCS1ItEaSu70uOX528bTwWHqA$/i)]",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "hostname",
+              "column_type": "string"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01SA4ZXCNF1FV6aV7OcGr3VYedGGIYQAQjV",
+        "name": "Execute Python Script",
+        "title": "Find MAC addresses",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Find MAC addresses",
+          "script": "import json\n\nmacs = {}\nresponsestring = '$activity.definition_activity_01SA28AOOGFGW2Mi5BOcDV8UOq0MT97KFpM.output.response_body$'\n\nresponse = json.loads(responsestring)\n\ndata = response[\"data\"]\nfor computer in data:\n\tif \"hostname\" in computer and \"network_addresses\" in computer and len(computer[\"network_addresses\"]) \u003e 0 and \"mac\" in computer[\"network_addresses\"][0]:\n\t\tmacs[computer[\"hostname\"]] = computer[\"network_addresses\"][0][\"mac\"]\n\nmacstring = json.dumps(macs)",
+          "script_queries": [
+            {
+              "script_query": "macstring",
+              "script_query_name": "MAC Addresses",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01SA2P9EWJDIR6KhrD31N2GBz1UHAVT8sj2",
+        "name": "For Each",
+        "title": "For Each Host",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each Host",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01SA2O8BVN3JO29PhfRukUGV0RZrs227q8K.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01SA56ZE9V04A49IRuY6D6Kzwb5WXtqJMlN",
+            "name": "Execute Python Script",
+            "title": "Choose MAC Address",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Choose MAC Address",
+              "script": "import json\n\nhostname = '$activity.definition_activity_01SA2P9EWJDIR6KhrD31N2GBz1UHAVT8sj2.input.source_array[@].hostname$'\nmac = '00:00:00:00:00:00'\nmacstring = '$activity.definition_activity_01SA4ZXCNF1FV6aV7OcGr3VYedGGIYQAQjV.output.script_queries.MAC Addresses$'\n\nmacs = json.loads(macstring)\n\nif hostname in macs:\n\tmac = macs[hostname]\n",
+              "script_queries": [
+                {
+                  "script_query": "mac",
+                  "script_query_name": "MAC Address",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01SYW6OWXSXLK3N7dWaGcSbhBn1IZwOjhsv",
+            "name": "Query an Endpoint's Shared Folders",
+            "title": "Query an Endpoint's Shared Folders",
+            "type": "workflow.sub_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Query an Endpoint's Shared Folders",
+              "input": {
+                "variable_workflow_01S9911145OVT1Rqv9sXYSd258CegdoyLMj": "$activity.definition_activity_01SA2P9EWJDIR6KhrD31N2GBz1UHAVT8sj2.input.source_array[@].hostname$",
+                "variable_workflow_01S991EBJE2JS2NEEuesdwEpiINYfADvYpA": "$activity.definition_activity_01SA56ZE9V04A49IRuY6D6Kzwb5WXtqJMlN.output.script_queries.MAC Address$"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "no_target": true
+              },
+              "workflow_id": "definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01SA2XP1FUHZF0nVKbd52eflJxIcutai5I0",
+            "name": "Execute Python Script",
+            "title": "Compose New Result",
+            "type": "python3.script",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": false,
+              "display_name": "Compose New Result",
+              "script": "import json\n\nresultstring = '$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SA2YH1JYNAG71hyDwc1hCAWmFSyktc1Gc$'\ninputstring = '$activity.definition_activity_01SYW6OWXSXLK3N7dWaGcSbhBn1IZwOjhsv.output.variable_workflow_01S8I315FMJ6K347xdGNnsDEZhmRh8G67Yf$'\n\n\nresult = json.loads(resultstring)\nsource = json.loads(inputstring)\n\nfor hash in source:\n\tif hash in result:\n\t\tresult[hash][\"count\"] += 1\n\telse:\n\t\tresult[hash] = { \"hash\": hash, \"filename\": source[hash], \"count\": 1 }\n\nresultstring = json.dumps(result)\n",
+              "script_queries": [
+                {
+                  "script_query": "resultstring",
+                  "script_query_name": "New Result",
+                  "script_query_type": "string"
+                }
+              ],
+              "skip_execution": false
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01SA2XL2D6SID5NXnqf1Uz66rUjeHgyQHrS",
+            "name": "Set Variables",
+            "title": "Update Result",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Update Result",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SA2YH1JYNAG71hyDwc1hCAWmFSyktc1Gc$",
+                  "variable_value_new": "$activity.definition_activity_01SA2XP1FUHZF0nVKbd52eflJxIcutai5I0.output.script_queries.New Result$"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01SA37VTAAGHJ4NbtIG9QS3WHPhMAn1fu9l",
+        "name": "Execute Python Script",
+        "title": "Filter by Count Threshold",
+        "type": "python3.script",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Filter by Count Threshold",
+          "script": "import json\n\nresultstring = '$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SA2YH1JYNAG71hyDwc1hCAWmFSyktc1Gc$'\nthreshold = $workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.input.variable_workflow_01SA3BVEP6PP42Z2Aosh3FKKmxwy2FkwRyf$\n\nfiltered = {\"files\": []}\nresult = json.loads(resultstring)\nfor hash in result:\n\tif result[hash][\"count\"] \u003e threshold:\n\t\tfiltered[\"files\"].append(result[hash])\n\nfilteredstring = json.dumps(filtered)\n",
+          "script_queries": [
+            {
+              "script_query": "filteredstring",
+              "script_query_name": "Potential Files",
+              "script_query_type": "string"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01SA7Y2JZVS1J5uNTP8qeQ0itwL972IuebI",
+        "name": "Read Table from JSON",
+        "title": "Potential Files → ARRAY",
+        "type": "corejava.read_table_from_json",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Potential Files → ARRAY",
+          "input_json": "$activity.definition_activity_01SA37VTAAGHJ4NbtIG9QS3WHPhMAn1fu9l.output.script_queries.Potential Files$",
+          "jsonpath_query": "$.files",
+          "persist_output": false,
+          "populate_columns": false,
+          "skip_execution": false,
+          "table_columns": [
+            {
+              "column_name": "hash",
+              "column_type": "string"
+            },
+            {
+              "column_name": "filename",
+              "column_type": "string"
+            },
+            {
+              "column_name": "count",
+              "column_type": "integer"
+            }
+          ]
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01SA3E10MVYMO5SlUVkeVfzYaXAld9SJEmn",
+        "name": "For Each",
+        "title": "For Each Potential File",
+        "type": "logic.for_each",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "For Each Potential File",
+          "skip_execution": false,
+          "source_array": "$activity.definition_activity_01SA7Y2JZVS1J5uNTP8qeQ0itwL972IuebI.output.read_table_from_json$"
+        },
+        "object_type": "definition_activity",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01SA7OA4W8QMF6UIB1rUiSoPnchWuakRWvC",
+            "name": "Set Variables",
+            "title": "Reset Whitelisted Flag",
+            "type": "core.set_multiple_variables",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Reset Whitelisted Flag",
+              "skip_execution": false,
+              "variables_to_update": [
+                {
+                  "variable_to_update": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SA7O1WAEY7K2MDPLjNey1fezKout8E9fA$",
+                  "variable_value_new": false
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01SA7LN09UJL153lSnaSpDNyZ3YbeoiccCD",
+            "name": "For Each",
+            "title": "Loop Whitelist",
+            "type": "logic.for_each",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Loop Whitelist",
+              "skip_execution": false,
+              "source_array": "$global.variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd.global.variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd$"
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01SA3GKOSEF8S5LPS0mnHDDIwggaeRBlLKa",
+                "name": "Condition Block",
+                "title": "Are the hashes the same?",
+                "type": "logic.if_else",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Are the hashes the same?",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "blocks": [
+                  {
+                    "unique_name": "definition_activity_01SA3GKP7MC9Y56eg7jnEx9XBnH7fOQCG1D",
+                    "name": "Condition Branch",
+                    "title": "Yes, the hashes match",
+                    "type": "logic.condition_block",
+                    "base_type": "activity",
+                    "properties": {
+                      "condition": {
+                        "left_operand": "$activity.definition_activity_01SA7LN09UJL153lSnaSpDNyZ3YbeoiccCD.input.source_array[@].hash$",
+                        "operator": "eq",
+                        "right_operand": "$activity.definition_activity_01SA3E10MVYMO5SlUVkeVfzYaXAld9SJEmn.input.source_array[@].hash$"
+                      },
+                      "continue_on_failure": false,
+                      "display_name": "Yes, the hashes match",
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01SA7OPPYCL3W4gomqUhN8zFxMHuEODzQna",
+                        "name": "Set Variables",
+                        "title": "Set Whitelisted Flag",
+                        "type": "core.set_multiple_variables",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Set Whitelisted Flag",
+                          "skip_execution": false,
+                          "variables_to_update": [
+                            {
+                              "variable_to_update": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SA7O1WAEY7K2MDPLjNey1fezKout8E9fA$",
+                              "variable_value_new": true
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01SBZX81CHXAK2u1xSbCurrQjvCbZA5rhdj",
+                        "name": "Break",
+                        "title": "Break",
+                        "type": "logic.break",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "display_name": "Break",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "unique_name": "definition_activity_01SA7R5DGHH2Z1yhKIh3qajXCQNZFnhWkth",
+            "name": "Condition Block",
+            "title": "Is it whitelisted?",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Is it whitelisted?",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01SA7R5DNQ9V77jTUkX61VMrclvm2fjdrGA",
+                "name": "Condition Branch",
+                "title": "No, it is not whitelisted",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SA7O1WAEY7K2MDPLjNey1fezKout8E9fA$",
+                    "operator": "eq",
+                    "right_operand": false
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "No, it is not whitelisted",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01SA7VAIH38XP6mGwlF2Y3ZZIvDvzw9pvD4",
+                    "name": "Add Row to Table",
+                    "title": "Add File to Output Table",
+                    "type": "core.addrowtotable",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Add File to Output Table",
+                      "input_table": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SA7V728O7XL2qGQlYgLKeC5q7J6z3UDxA$",
+                      "row": [
+                        {
+                          "key": "hash",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01SA3E10MVYMO5SlUVkeVfzYaXAld9SJEmn.input.source_array[@].hash$"
+                        },
+                        {
+                          "key": "filename",
+                          "type": "string",
+                          "value": "$activity.definition_activity_01SA3E10MVYMO5SlUVkeVfzYaXAld9SJEmn.input.source_array[@].filename$"
+                        },
+                        {
+                          "key": "count",
+                          "type": "integer",
+                          "value": "$activity.definition_activity_01SA3E10MVYMO5SlUVkeVfzYaXAld9SJEmn.input.source_array[@].count$"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01SC0RQ0T4SDV7dFHCsBzjWE9XqNYm6Xnhm",
+                    "name": "Set Variables",
+                    "title": "Flag \"Send Message\"",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Flag \"Send Message\"",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SC0RCZ661DN6Igl4p995BUlp6luZEz3l0$",
+                          "variable_value_new": true
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01SA7RYU9GX6I1fwZS2YdiJqqPo9FeJzM3T",
+                "name": "Condition Branch",
+                "title": "Yes, it is Whitelisted",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SA7O1WAEY7K2MDPLjNey1fezKout8E9fA$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "Yes, it is Whitelisted",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01SBZYMD0V9JV26QkBzjnHpj53kb0lXePAD",
+                    "name": "Set Variables",
+                    "title": "Exclude File",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Exclude File",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SBZYTY6P1I01P4JmtGCTMCdlEn4ZoOGAh$",
+                          "variable_value_new": "a"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "unique_name": "definition_activity_01SC0RIKO4HX71vkzzcl4cNYkm8g8Wk8K2w",
+        "name": "Condition Block",
+        "title": "Send Message?",
+        "type": "logic.if_else",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Send Message?",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity",
+        "blocks": [
+          {
+            "unique_name": "definition_activity_01SC0RIKVQCY55GKSNSIWsAfxwviSJoaZdQ",
+            "name": "Condition Branch",
+            "title": "Yes, message needs to be sent",
+            "type": "logic.condition_block",
+            "base_type": "activity",
+            "properties": {
+              "condition": {
+                "left_operand": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SC0RCZ661DN6Igl4p995BUlp6luZEz3l0$",
+                "operator": "eq",
+                "right_operand": true
+              },
+              "continue_on_failure": false,
+              "display_name": "Yes, message needs to be sent",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "actions": [
+              {
+                "unique_name": "definition_activity_01SBN2BGDVWUM17WlheBDzExAEZU4fCvBQ1",
+                "name": "For Each",
+                "title": "For Each Potential File (For formatting)",
+                "type": "logic.for_each",
+                "base_type": "activity",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "For Each Potential File (For formatting)",
+                  "skip_execution": false,
+                  "source_array": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SA7V728O7XL2qGQlYgLKeC5q7J6z3UDxA$"
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01SBN0W3TEVKH6Talgy25VwKNypVGSCs5Vl",
+                    "name": "Execute Python Script",
+                    "title": "Format Row",
+                    "type": "python3.script",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "display_name": "Format Row",
+                      "script": "markdown = '1. [$activity.definition_activity_01SBN2BGDVWUM17WlheBDzExAEZU4fCvBQ1.input.source_array[@].count$ duplicates] **$activity.definition_activity_01SBN2BGDVWUM17WlheBDzExAEZU4fCvBQ1.input.source_array[@].filename$** *($activity.definition_activity_01SBN2BGDVWUM17WlheBDzExAEZU4fCvBQ1.input.source_array[@].hash$)*\\n'",
+                      "script_queries": [
+                        {
+                          "script_query": "markdown",
+                          "script_query_name": "Markdown",
+                          "script_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01SBN57DFHU934y3GqxfPEz78X3hD29QOwk",
+                    "name": "Set Variables",
+                    "title": "Update Markdown",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Update Markdown",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SBN5PEOIAG90NGKBkbp1hB88mPiL8HEhW$",
+                          "variable_value_new": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SBN5PEOIAG90NGKBkbp1hB88mPiL8HEhW$\\n$activity.definition_activity_01SBN0W3TEVKH6Talgy25VwKNypVGSCs5Vl.output.script_queries.Markdown$"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01SATZYNZ0SJS4fx6Rbulst4SISuLDavKAO",
+                "name": "Webex Teams - Post Message to Room",
+                "title": "Webex Teams - Post Message to Room",
+                "type": "workflow.atomic_workflow",
+                "base_type": "subworkflow",
+                "properties": {
+                  "continue_on_failure": false,
+                  "display_name": "Webex Teams - Post Message to Room",
+                  "input": {
+                    "variable_workflow_01PP78DJH1TI76BYfsu9g0Tqj2S6cUxjtu5": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SAVC9N3UY3G3qpGOgPym86C6isZPuS62D$",
+                    "variable_workflow_01PP78DJH1XNQ7gNQ5iZdperRHqrppzARXC": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.local.variable_workflow_01SAUQ2WXCCJC1IJ2XpNpzeL5UKTYrWjudD$",
+                    "variable_workflow_01PP78DJH1YWL3allalGQbg1VkgKwh9GvCi": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SBN5PEOIAG90NGKBkbp1hB88mPiL8HEhW$",
+                    "variable_workflow_01PP78DJH22BB3Ej3I8tJ4OCQur0unYGjj9": "$workflow.definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx.output.variable_workflow_01SBN5PEOIAG90NGKBkbp1hB88mPiL8HEhW$"
+                  },
+                  "runtime_user": {
+                    "target_default": true
+                  },
+                  "skip_execution": false,
+                  "target": {
+                    "override_workflow_target": true,
+                    "target_id": "definition_target_01LIJLFI50W8Y6sDbAcsa8vGCKLyOil70FY",
+                    "target_type": "web-service.endpoint"
+                  },
+                  "workflow_id": "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw"
+                },
+                "object_type": "definition_activity"
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "categories": [
+      "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ"
+    ]
+  },
+  "categories": {
+    "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ": {
+      "unique_name": "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ",
+      "name": "Boros Alex",
+      "title": "Boros Alex",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Anything associated with Boros Alex's Thesis Work: Modern Automated Threat Detection and Prevention utilizing Cisco SecureX",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "triggers": {
+    "triggerschedule_01SBO5LIV7DEN5uKpRLG6lJeQsJKGY8kAHP": {
+      "workflow_id": "definition_workflow_01S9SI5B5WDP05xmfOlCxMXLD0QYwaODMYx",
+      "name": "Daily Checkup",
+      "title": "",
+      "lowercase_name": "schedule.daily_checkup",
+      "type": "schedule",
+      "base_type": "trigger",
+      "ref_id": "schedule_01JZC7MAJJFFV5JNmOkG7ks9Qs7lz3ywoBB",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerschedule_01SBO5LIV7DEN5uKpRLG6lJeQsJKGY8kAHP",
+      "object_type": "triggerschedule"
+    }
+  },
+  "schedules": {
+    "schedule_01JZC7MAJJFFV5JNmOkG7ks9Qs7lz3ywoBB": {
+      "unique_name": "schedule_01JZC7MAJJFFV5JNmOkG7ks9Qs7lz3ywoBB",
+      "name": "Daily ",
+      "type": "basic.schedule",
+      "base_type": "schedule",
+      "properties": {
+        "calendar": "calendar_recurring_1BMfMWvgiDhSjBQ7hTSyvz3NyVZ",
+        "timezone": "Etc/GMT+0",
+        "starttime": "01:00",
+        "interval_hours": 0,
+        "interval_minutes": 0,
+        "number_of_times": 1,
+        "display_name": "Daily ",
+        "description": ""
+      },
+      "version": "1.0.0",
+      "object_type": "schedule"
+    }
+  },
+  "targets": {
+    "definition_target_01LIJLFI50W8Y6sDbAcsa8vGCKLyOil70FY": {
+      "unique_name": "definition_target_01LIJLFI50W8Y6sDbAcsa8vGCKLyOil70FY",
+      "name": "Webex Teams",
+      "title": "Webex Teams",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "description": "Webex Teams",
+        "disable_certificate_validation": false,
+        "display_name": "Webex Teams",
+        "host": "webexapis.com",
+        "no_runtime_user": true,
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01LMPDSCJJHOG7g9n177jnqOldrjL8iVZzO": {
+      "unique_name": "definition_target_01LMPDSCJJHOG7g9n177jnqOldrjL8iVZzO",
+      "name": "NEW_Orbital_Target",
+      "title": "NEW_Orbital_Target",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01KHIOYQKCRJO10MRa5T9iGrClD1Zj9cShW",
+        "disable_certificate_validation": true,
+        "display_name": "NEW_Orbital_Target",
+        "host": "orbital.amp.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "path": "/v0",
+        "port": 443,
+        "protocol": "https"
+      }
+    },
+    "definition_target_01LMZ4T01LXYM0KDAj3xQ5Kv97tAljDOX3m": {
+      "unique_name": "definition_target_01LMZ4T01LXYM0KDAj3xQ5Kv97tAljDOX3m",
+      "name": "Orbital_For_Access_Token",
+      "title": "Orbital Target for access token",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01G3W9DWHEOQQ6V6W5Fp9jDtHloNFfWmXyQ",
+        "description": "Orbital_For_Access_Token",
+        "disable_certificate_validation": false,
+        "display_name": "Orbital_For_Access_Token",
+        "host": "visibility.amp.cisco.com",
+        "no_runtime_user": false,
+        "path": "/iroh",
+        "protocol": "https"
+      }
+    },
+    "definition_target_01S9WJLG94O1A0HkwcNgLRoEkbShHGfAJdP": {
+      "unique_name": "definition_target_01S9WJLG94O1A0HkwcNgLRoEkbShHGfAJdP",
+      "name": "Boros-Thesis-AMP-API-v1",
+      "title": "Boros-Thesis-AMP-API-v1",
+      "type": "web-service.endpoint",
+      "base_type": "target",
+      "object_type": "definition_target",
+      "properties": {
+        "default_runtime_user_id": "definition_runtime_user_01S9WLCQKSIR23CZIxeJXcBxyV9TQrxMLK0",
+        "description": "Target for finding computer details (Hostnames, MAC addresses, etc.) by AMP groups.",
+        "disable_certificate_validation": false,
+        "display_name": "Boros-Thesis-AMP-API-v1",
+        "host": "api.amp.cisco.com",
+        "ignore_proxy": false,
+        "no_runtime_user": false,
+        "path": "/v1/",
+        "port": 443,
+        "protocol": "https"
+      }
+    }
+  },
+  "runtime_users": {
+    "definition_runtime_user_01G3W9DWHEOQQ6V6W5Fp9jDtHloNFfWmXyQ": {
+      "unique_name": "definition_runtime_user_01G3W9DWHEOQQ6V6W5Fp9jDtHloNFfWmXyQ",
+      "name": "Orbital_Credentials",
+      "title": "Orbital_Credentials",
+      "description": "Account Key for Orbital",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "Orbital_Credentials"
+      }
+    },
+    "definition_runtime_user_01KHIOYQKCRJO10MRa5T9iGrClD1Zj9cShW": {
+      "unique_name": "definition_runtime_user_01KHIOYQKCRJO10MRa5T9iGrClD1Zj9cShW",
+      "name": "Orbital_keys",
+      "title": "Orbital_keys",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "display_name": "Orbital_keys"
+      }
+    },
+    "definition_runtime_user_01S9WLCQKSIR23CZIxeJXcBxyV9TQrxMLK0": {
+      "unique_name": "definition_runtime_user_01S9WLCQKSIR23CZIxeJXcBxyV9TQrxMLK0",
+      "name": "Boros-Thesis-AMP-Basic-Auth",
+      "title": "Boros-Thesis-AMP-Basic-Auth",
+      "type": "runtime_user.web-service_basic_credentials",
+      "base_type": "runtime_user",
+      "object_type": "definition_runtime_user",
+      "properties": {
+        "auth_option": "*****",
+        "basic_password": "*****",
+        "basic_username": "*****",
+        "description": "Basic authentication through HTTP for AMP.",
+        "display_name": "Boros-Thesis-AMP-Basic-Auth"
+      }
+    }
+  },
+  "variables": {
+    "variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd": {
+      "unique_name": "variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd",
+      "schema_id": "tabletype_01SBMYGBP1XID1ZmFTXxIUbLOqtUIYDBOhT",
+      "properties": {
+        "value": [
+          {
+            "column_data": {
+              "description": "(black.png) A fully black 1920x1080 wallpaper.",
+              "hash": "8ed817abfb94270aaf9b3f392a5927bc019277542374a9de550521e2aa34a7f6"
+            }
+          }
+        ],
+        "scope": "global",
+        "name": "Boros-T1570-Lateral-Tool-Transfer-Whitelist",
+        "type": "datatype.table",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01SA46CB2UUIS30ShEL1B74BT0Aj3IMUHwm": {
+      "unique_name": "tabletype_01SA46CB2UUIS30ShEL1B74BT0Aj3IMUHwm",
+      "data_type": "datatype.tabletype",
+      "display_name": "Boros-T1570-Lateral-Tool-Transfer-Potential-List",
+      "columns": [
+        {
+          "is_required": true,
+          "maxLength": 2048,
+          "maximum": 0,
+          "minimum": 0,
+          "name": "filename",
+          "title": "Filename",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "maximum": 999999,
+          "minimum": 0,
+          "name": "count",
+          "title": "Count",
+          "type": "integer"
+        },
+        {
+          "is_required": true,
+          "maxLength": 64,
+          "maximum": 0,
+          "minimum": 0,
+          "name": "hash",
+          "title": "Hash",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    },
+    "tabletype_01SBMYGBP1XID1ZmFTXxIUbLOqtUIYDBOhT": {
+      "unique_name": "tabletype_01SBMYGBP1XID1ZmFTXxIUbLOqtUIYDBOhT",
+      "data_type": "datatype.tabletype",
+      "display_name": "Boros-T1570-Lateral-Tool-Transfer-Whitelist",
+      "columns": [
+        {
+          "maxLength": 2048,
+          "maximum": 0,
+          "minimum": 0,
+          "name": "description",
+          "title": "Description",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "maxLength": 64,
+          "maximum": 0,
+          "minimum": 0,
+          "name": "hash",
+          "title": "Hash",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  },
+  "subworkflows": [
+    {
+      "workflow": {
+        "unique_name": "definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD",
+        "name": "Query an Endpoint's Shared Folders",
+        "title": "Query an Endpoint's Shared Folders",
+        "type": "generic.workflow",
+        "base_type": "workflow",
+        "variables": [
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "{}",
+              "scope": "output",
+              "name": "Result",
+              "type": "datatype.string",
+              "is_required": false,
+              "is_invisible": false
+            },
+            "unique_name": "variable_workflow_01S8I315FMJ6K347xdGNnsDEZhmRh8G67Yf",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "00:0c:29:e3:26:99",
+              "scope": "input",
+              "name": "MAC address",
+              "type": "datatype.string",
+              "is_required": false,
+              "is_invisible": false
+            },
+            "unique_name": "variable_workflow_01S991EBJE2JS2NEEuesdwEpiINYfADvYpA",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "",
+              "scope": "local",
+              "name": "unused",
+              "type": "datatype.string",
+              "description": "This variable is here so that it can be set by a Set Variables activity, making them comment blocks basically.\n\nIt should never be read!",
+              "is_required": false,
+              "is_invisible": false
+            },
+            "unique_name": "variable_workflow_01SBWT4LPPTIB3IOaA2N86FO1oT7t64Jmr4",
+            "object_type": "variable_workflow"
+          },
+          {
+            "schema_id": "datatype.string",
+            "properties": {
+              "value": "BOROS-THESIS-1",
+              "scope": "input",
+              "name": "Hostname",
+              "type": "datatype.string",
+              "is_required": true,
+              "is_invisible": false
+            },
+            "unique_name": "variable_workflow_01S9911145OVT1Rqv9sXYSd258CegdoyLMj",
+            "object_type": "variable_workflow"
+          }
+        ],
+        "properties": {
+          "atomic": {
+            "is_atomic": false
+          },
+          "delete_workflow_instance": false,
+          "description": "Gathers shared folders' files and their hash of a specified AMP protected (Orbital supported) Windows host.\nhttps://attack.mitre.org/techniques/T1570/",
+          "display_name": "Query an Endpoint's Shared Folders",
+          "runtime_user": {
+            "target_default": true
+          },
+          "target": {
+            "no_target": true
+          }
+        },
+        "object_type": "definition_workflow",
+        "actions": [
+          {
+            "unique_name": "definition_activity_01QS0I6ZMLWN01Qa1rjTO4BjkSZDA3NlMuF",
+            "name": "Orbital - Get Access Token",
+            "title": "Orbital - Get Access Token",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": false,
+              "display_name": "Orbital - Get Access Token",
+              "runtime_user": {
+                "override_target_runtime_user": true,
+                "runtime_user_id": "definition_runtime_user_01G3W9DWHEOQQ6V6W5Fp9jDtHloNFfWmXyQ",
+                "runtime_user_type": "runtime_user.web-service_basic_credentials"
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01LMZ4T01LXYM0KDAj3xQ5Kv97tAljDOX3m",
+                "target_type": "web-service.endpoint"
+              },
+              "workflow_id": "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01S8HXX7GJ12279uE7nnhw9xVYNis3zItfV",
+            "name": "Query Shared Folders",
+            "title": "Query Shared Folders",
+            "type": "workflow.atomic_workflow",
+            "base_type": "subworkflow",
+            "properties": {
+              "continue_on_failure": true,
+              "description": "Get the active folder shares except the three major default ones: IPC$, ADMIN$, C$",
+              "display_name": "Query Shared Folders",
+              "input": {
+                "variable_workflow_01PQ89Y78TFQW6l81VWArKdsXi6aTo6ttQ0": "",
+                "variable_workflow_01PQ89Y78TJW122COMKV4v5IaRfd0rHmKya": 2,
+                "variable_workflow_01PQ89Y78TL4S4gpTXEcizKNehfpT57GFfH": "",
+                "variable_workflow_01PQ89Y78TNHZ1ejIRsg03CgWYqamCUu6fr": "",
+                "variable_workflow_01PQ89Y78TQXF6sxdOzpuMy2ywJ5cfMO7tJ": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.input.variable_workflow_01S991EBJE2JS2NEEuesdwEpiINYfADvYpA$",
+                "variable_workflow_01PQ89Y78TS3M5dh6fdlDmbg7Le3dYWSgik": "",
+                "variable_workflow_01PQ89Y78TT7A5llxo9E9lASXTaGfke42en": "SELECT path FROM shared_resources WHERE name!=\"ADMIN$\" AND name!=\"C$\" AND name!=\"IPC$\";",
+                "variable_workflow_01PQ89Y78TUBI7FD5G2DozkMtabDoLrOKty": "GetSharedFolders",
+                "variable_workflow_01PQ89Y78TVI01vdmVFTvVgvkyDjRy3dqcR": true,
+                "variable_workflow_01PQ89Y78TWRE5UDFeOBcXf0IXKBD4SMiNb": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.input.variable_workflow_01S9911145OVT1Rqv9sXYSd258CegdoyLMj$",
+                "variable_workflow_01PQ89Y78TZDC3GfT8KI2vHAVvZgDEtWRpC": "$activity.definition_activity_01QS0I6ZMLWN01Qa1rjTO4BjkSZDA3NlMuF.output.variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726$"
+              },
+              "runtime_user": {
+                "target_default": true
+              },
+              "skip_execution": false,
+              "target": {
+                "override_workflow_target": true,
+                "target_id": "definition_target_01LMPDSCJJHOG7g9n177jnqOldrjL8iVZzO",
+                "target_type": "web-service.endpoint"
+              },
+              "workflow_id": "definition_workflow_01PQ89Y7GHRYN1Po7FXaw3jvoMHv5VaAlG1"
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01S8IGGUA2IHC6QhQ5UK7jMc0e6EuAOoadj",
+            "name": "Read Table from JSON",
+            "title": "Read Query Response",
+            "type": "corejava.read_table_from_json",
+            "base_type": "activity",
+            "properties": {
+              "action_timeout": 180,
+              "continue_on_failure": true,
+              "description": "Extract the shared folders' path from the response.",
+              "display_name": "Read Query Response",
+              "input_json": "$activity.definition_activity_01S8HXX7GJ12279uE7nnhw9xVYNis3zItfV.output.variable_workflow_01PQ89Y78TOO45sTqV1zHz0gwOhAVGuospK$",
+              "jsonpath_query": "$[0].osQueryResult[0].values",
+              "persist_output": false,
+              "populate_columns": false,
+              "skip_execution": false,
+              "table_columns": [
+                {
+                  "column_name": "path",
+                  "column_type": "string"
+                }
+              ]
+            },
+            "object_type": "definition_activity"
+          },
+          {
+            "unique_name": "definition_activity_01S99NYAGVNGY7P73jJmlshRcsKYG6QOkF4",
+            "name": "Condition Block",
+            "title": "Is the Query Result Readable?",
+            "type": "logic.if_else",
+            "base_type": "activity",
+            "properties": {
+              "continue_on_failure": false,
+              "description": "Was the extraction successful?",
+              "display_name": "Is the Query Result Readable?",
+              "skip_execution": false
+            },
+            "object_type": "definition_activity",
+            "blocks": [
+              {
+                "unique_name": "definition_activity_01S99NYAP8HYF5SNlsAeYIjThITJ8KLBepR",
+                "name": "Condition Branch",
+                "title": "Yes, it is Readable",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01S8IGGUA2IHC6QhQ5UK7jMc0e6EuAOoadj.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": true
+                  },
+                  "continue_on_failure": false,
+                  "description": "The extraction was successful, we have a JSON string filled with path(s).",
+                  "display_name": "Yes, it is Readable",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01S97UZBHDAC73dMOdn1L9QVRRsTomaiVJj",
+                    "name": "Execute Python Script",
+                    "title": "Reformat Response",
+                    "type": "python3.script",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "description": "The For Each block requires an array, but Orbital has an incompatible data structure. The response we got this far requires a bit of extra parsing: this script readies the extracted paths in the correct format.",
+                      "display_name": "Reformat Response",
+                      "script": "import json\n\nnewjson = \"{[]}\"\ninputstring = '$activity.definition_activity_01S8IGGUA2IHC6QhQ5UK7jMc0e6EuAOoadj.output.response_body$'\n\nrawsource = json.loads(inputstring.replace('\\\\', '\\\\\\\\'))\nif len(rawsource) \u003e 0:\n\tsource = rawsource[0]\n\n\tneworder = []\n\tfor path in source[\"path\"]:\n\t\tneworder.append({\"path\":path})\n\n\tnewjson = json.dumps({\"paths\":neworder})",
+                      "script_queries": [
+                        {
+                          "script_query": "newjson",
+                          "script_query_name": "Reformatted",
+                          "script_query_type": "string"
+                        }
+                      ],
+                      "skip_execution": false
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01S98JJAMFZVW344OSNmT0L8gobH9D44vJB",
+                    "name": "Read Table from JSON",
+                    "title": "Reformatted → ARRAY",
+                    "type": "corejava.read_table_from_json",
+                    "base_type": "activity",
+                    "properties": {
+                      "action_timeout": 180,
+                      "continue_on_failure": false,
+                      "description": "Create an array of paths for the For Each loop.",
+                      "display_name": "Reformatted → ARRAY",
+                      "input_json": "$activity.definition_activity_01S97UZBHDAC73dMOdn1L9QVRRsTomaiVJj.output.script_queries.Reformatted$",
+                      "jsonpath_query": "$.paths",
+                      "persist_output": false,
+                      "populate_columns": false,
+                      "skip_execution": false,
+                      "table_columns": [
+                        {
+                          "column_name": "path",
+                          "column_type": "string"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  },
+                  {
+                    "unique_name": "definition_activity_01S973STF0KUO3usnKrMaq3bl5IAcmFTaQc",
+                    "name": "For Each",
+                    "title": "For Each Share",
+                    "type": "logic.for_each",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "description": "For Each path in the shares array:..",
+                      "display_name": "For Each Share",
+                      "skip_execution": false,
+                      "source_array": "$activity.definition_activity_01S98JJAMFZVW344OSNmT0L8gobH9D44vJB.output.read_table_from_json$"
+                    },
+                    "object_type": "definition_activity",
+                    "actions": [
+                      {
+                        "unique_name": "definition_activity_01S99J19GICWF5mhUxCWVDJtmURoLN8qN3k",
+                        "name": "Replace String",
+                        "title": "Escape Path Backslashes",
+                        "type": "core.replacestring",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "description": "SecureX handles raw JSON, but the path is in regular Windows format. We need to double the backslashes to make it compatible with JSON injection.",
+                          "display_name": "Escape Path Backslashes",
+                          "input_string": "$activity.definition_activity_01S973STF0KUO3usnKrMaq3bl5IAcmFTaQc.input.source_array[@].path$",
+                          "replace_list": [
+                            {
+                              "replaced_string": "\\",
+                              "replacement_string": "\\\\"
+                            }
+                          ],
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01S8IMCF21HLF658PRNqnJL6GCeC8w31lzX",
+                        "name": "Query Folder",
+                        "title": "Query Folder",
+                        "type": "workflow.atomic_workflow",
+                        "base_type": "subworkflow",
+                        "properties": {
+                          "continue_on_failure": true,
+                          "description": "Get the file name and hash of every file in the path.",
+                          "display_name": "Query Folder",
+                          "input": {
+                            "variable_workflow_01PQ89Y78TFQW6l81VWArKdsXi6aTo6ttQ0": "",
+                            "variable_workflow_01PQ89Y78TJW122COMKV4v5IaRfd0rHmKya": 2,
+                            "variable_workflow_01PQ89Y78TL4S4gpTXEcizKNehfpT57GFfH": "",
+                            "variable_workflow_01PQ89Y78TNHZ1ejIRsg03CgWYqamCUu6fr": "",
+                            "variable_workflow_01PQ89Y78TQXF6sxdOzpuMy2ywJ5cfMO7tJ": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.input.variable_workflow_01S991EBJE2JS2NEEuesdwEpiINYfADvYpA$",
+                            "variable_workflow_01PQ89Y78TS3M5dh6fdlDmbg7Le3dYWSgik": "",
+                            "variable_workflow_01PQ89Y78TT7A5llxo9E9lASXTaGfke42en": "SELECT f.filename, h.sha256 FROM file f LEFT JOIN hash h on f.path=h.path WHERE f.path LIKE \"$activity.definition_activity_01S99J19GICWF5mhUxCWVDJtmURoLN8qN3k.output.result_string$\\\\%%\" AND f.filename != \".\";",
+                            "variable_workflow_01PQ89Y78TUBI7FD5G2DozkMtabDoLrOKty": "GetSharedFolder",
+                            "variable_workflow_01PQ89Y78TVI01vdmVFTvVgvkyDjRy3dqcR": true,
+                            "variable_workflow_01PQ89Y78TWRE5UDFeOBcXf0IXKBD4SMiNb": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.input.variable_workflow_01S9911145OVT1Rqv9sXYSd258CegdoyLMj$",
+                            "variable_workflow_01PQ89Y78TZDC3GfT8KI2vHAVvZgDEtWRpC": "$activity.definition_activity_01QS0I6ZMLWN01Qa1rjTO4BjkSZDA3NlMuF.output.variable_workflow_01BNOOXA3G6MV1PGAvsfZOKDdMYcE6XS726$"
+                          },
+                          "runtime_user": {
+                            "target_default": true
+                          },
+                          "skip_execution": false,
+                          "target": {
+                            "override_workflow_target": true,
+                            "target_id": "definition_target_01LMPDSCJJHOG7g9n177jnqOldrjL8iVZzO",
+                            "target_type": "web-service.endpoint"
+                          },
+                          "workflow_id": "definition_workflow_01PQ89Y7GHRYN1Po7FXaw3jvoMHv5VaAlG1"
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01S98T87O5NNZ5HKMi0H1muUU7FUx8ISd2A",
+                        "name": "Read Table from JSON",
+                        "title": "Read Query Response",
+                        "type": "corejava.read_table_from_json",
+                        "base_type": "activity",
+                        "properties": {
+                          "action_timeout": 180,
+                          "continue_on_failure": true,
+                          "description": "Extract the values from the Orbital response like we did it for the shares.",
+                          "display_name": "Read Query Response",
+                          "input_json": "$activity.definition_activity_01S8IMCF21HLF658PRNqnJL6GCeC8w31lzX.output.variable_workflow_01PQ89Y78TOO45sTqV1zHz0gwOhAVGuospK$",
+                          "jsonpath_query": "$[0].osQueryResult[0].values",
+                          "persist_output": false,
+                          "populate_columns": false,
+                          "skip_execution": false,
+                          "table_columns": [
+                            {
+                              "column_name": "path",
+                              "column_type": "string"
+                            }
+                          ]
+                        },
+                        "object_type": "definition_activity"
+                      },
+                      {
+                        "unique_name": "definition_activity_01S99Q0QSBWXD2z9VkS9kQH49Wp30D8Tgus",
+                        "name": "Condition Block",
+                        "title": "Was the Query Result Readable?",
+                        "type": "logic.if_else",
+                        "base_type": "activity",
+                        "properties": {
+                          "continue_on_failure": false,
+                          "description": "Was the extraction successful?",
+                          "display_name": "Was the Query Result Readable?",
+                          "skip_execution": false
+                        },
+                        "object_type": "definition_activity",
+                        "blocks": [
+                          {
+                            "unique_name": "definition_activity_01S99Q0QZ6X4Z2c1kLdLDSGHwxdp29v0Lsn",
+                            "name": "Condition Branch",
+                            "title": "Yes, it is Readable",
+                            "type": "logic.condition_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "condition": {
+                                "left_operand": "$activity.definition_activity_01S98T87O5NNZ5HKMi0H1muUU7FUx8ISd2A.output.succeeded$",
+                                "operator": "eq",
+                                "right_operand": true
+                              },
+                              "continue_on_failure": false,
+                              "description": "The extraction is successful and we have an even number of entries: they will form a two-column table.",
+                              "display_name": "Yes, it is Readable",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01S98TP9B5IVB06rJclJ8hhrYTv8OOhbzKK",
+                                "name": "Execute Python Script",
+                                "title": "Reformat Response",
+                                "type": "python3.script",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "continue_on_failure": false,
+                                  "description": "Arrange the response to a 2-column table and make it compatible with SecureX Core table parsing from JSON.",
+                                  "display_name": "Reformat Response",
+                                  "script": "import json\nimport math\n\nnewjson = \"{[]}\"\ninputstring = '$activity.definition_activity_01S98T87O5NNZ5HKMi0H1muUU7FUx8ISd2A.output.response_body$'\n\nrawsource = json.loads(inputstring.replace('\\\\', '\\\\\\\\'))\nif len(rawsource) \u003e 0:\n\tsource = rawsource[0][\"path\"]\n\t\n\tentries = math.floor(len(source) / 2)\n\t\n\tneworder = []\n\tfor x in range(entries):\n\t\tneworder.append({})\n\t\n\tcounter = 0\n\tfor path in source:\n\t\tif counter % 2 == 0:\n\t\t\tprop = \"filename\"\n\t\telse:\n\t\t\tprop = \"hash\"\n\t\t\n\t\tneworder[math.floor(counter/2)][prop] = path\n\t\tcounter += 1\n\n\tnewjson = json.dumps({\"paths\":neworder})\n",
+                                  "script_queries": [
+                                    {
+                                      "script_query": "newjson",
+                                      "script_query_name": "Reformatted",
+                                      "script_query_type": "string"
+                                    }
+                                  ],
+                                  "skip_execution": false
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01S8IOCA86TRD04AfgWtIfk3AdCW6T1Rld5",
+                                "name": "Read Table from JSON",
+                                "title": "Read Folder",
+                                "type": "corejava.read_table_from_json",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "continue_on_failure": false,
+                                  "description": "Make the files and hashes table an array.",
+                                  "display_name": "Read Folder",
+                                  "input_json": "$activity.definition_activity_01S98TP9B5IVB06rJclJ8hhrYTv8OOhbzKK.output.script_queries.Reformatted$",
+                                  "jsonpath_query": "$.paths",
+                                  "persist_output": false,
+                                  "populate_columns": false,
+                                  "skip_execution": false,
+                                  "table_columns": [
+                                    {
+                                      "column_name": "filename",
+                                      "column_type": "string"
+                                    },
+                                    {
+                                      "column_name": "hash",
+                                      "column_type": "string"
+                                    }
+                                  ]
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01S9A2P1267ZX3dr210w4lY9IDPALi234Rb",
+                                "name": "Execute Python Script",
+                                "title": "Compose New Result",
+                                "type": "python3.script",
+                                "base_type": "activity",
+                                "properties": {
+                                  "action_timeout": 180,
+                                  "continue_on_failure": false,
+                                  "description": "Take the workflow's output string and use it as a JSON table. Add all newly acquired hashes and their filenames into the table.",
+                                  "display_name": "Compose New Result",
+                                  "script": "import json\n\nresultstring = '$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.output.variable_workflow_01S8I315FMJ6K347xdGNnsDEZhmRh8G67Yf$'\ninputstring = '$activity.definition_activity_01S8IOCA86TRD04AfgWtIfk3AdCW6T1Rld5.output.response_body$'\n\n\nresult = json.loads(resultstring)\nsource = json.loads(inputstring)\n\nfor row in source:\n\tresult[row[\"hash\"]] = row[\"filename\"]\n\nresultstring = json.dumps(result)\n",
+                                  "script_queries": [
+                                    {
+                                      "script_query": "resultstring",
+                                      "script_query_name": "New Result",
+                                      "script_query_type": "string"
+                                    }
+                                  ],
+                                  "skip_execution": false
+                                },
+                                "object_type": "definition_activity"
+                              },
+                              {
+                                "unique_name": "definition_activity_01S9A2YQLIZHD5O5vn30jslxTogJEqFac35",
+                                "name": "Set Variables",
+                                "title": "Update Result",
+                                "type": "core.set_multiple_variables",
+                                "base_type": "activity",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "description": "Update the output to the updated table.",
+                                  "display_name": "Update Result",
+                                  "skip_execution": false,
+                                  "variables_to_update": [
+                                    {
+                                      "variable_to_update": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.output.variable_workflow_01S8I315FMJ6K347xdGNnsDEZhmRh8G67Yf$",
+                                      "variable_value_new": "$activity.definition_activity_01S9A2P1267ZX3dr210w4lY9IDPALi234Rb.output.script_queries.New Result$"
+                                    }
+                                  ]
+                                },
+                                "object_type": "definition_activity"
+                              }
+                            ]
+                          },
+                          {
+                            "unique_name": "definition_activity_01SA7TD167L1Y1g3drpvfKSpUYD1yHr93F3",
+                            "name": "Condition Branch",
+                            "title": "No, it is not readable",
+                            "type": "logic.condition_block",
+                            "base_type": "activity",
+                            "properties": {
+                              "condition": {
+                                "left_operand": "$activity.definition_activity_01S98T87O5NNZ5HKMi0H1muUU7FUx8ISd2A.output.succeeded$",
+                                "operator": "eq",
+                                "right_operand": false
+                              },
+                              "continue_on_failure": false,
+                              "display_name": "No, it is not readable",
+                              "skip_execution": false
+                            },
+                            "object_type": "definition_activity",
+                            "actions": [
+                              {
+                                "unique_name": "definition_activity_01SBWTA1C96CS5woNjQczxPjRHK4o2yGsPz",
+                                "name": "Set Variables",
+                                "title": "Skip Folder",
+                                "type": "core.set_multiple_variables",
+                                "base_type": "activity",
+                                "properties": {
+                                  "continue_on_failure": false,
+                                  "display_name": "Skip Folder",
+                                  "skip_execution": false,
+                                  "variables_to_update": [
+                                    {
+                                      "variable_to_update": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.local.variable_workflow_01SBWT4LPPTIB3IOaA2N86FO1oT7t64Jmr4$",
+                                      "variable_value_new": "a"
+                                    }
+                                  ]
+                                },
+                                "object_type": "definition_activity"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ]
+              },
+              {
+                "unique_name": "definition_activity_01SA7SKNHUXPK3wdKlJcTB9vz8TGXC4Fizn",
+                "name": "Condition Branch",
+                "title": "No, it is not readable",
+                "type": "logic.condition_block",
+                "base_type": "activity",
+                "properties": {
+                  "condition": {
+                    "left_operand": "$activity.definition_activity_01S8IGGUA2IHC6QhQ5UK7jMc0e6EuAOoadj.output.succeeded$",
+                    "operator": "eq",
+                    "right_operand": false
+                  },
+                  "continue_on_failure": false,
+                  "display_name": "No, it is not readable",
+                  "skip_execution": false
+                },
+                "object_type": "definition_activity",
+                "actions": [
+                  {
+                    "unique_name": "definition_activity_01SBWTBOQ60KT2wCKdfazKajolkd2LtHkM5",
+                    "name": "Set Variables",
+                    "title": "Skip Endpoint",
+                    "type": "core.set_multiple_variables",
+                    "base_type": "activity",
+                    "properties": {
+                      "continue_on_failure": false,
+                      "display_name": "Skip Endpoint",
+                      "skip_execution": false,
+                      "variables_to_update": [
+                        {
+                          "variable_to_update": "$workflow.definition_workflow_01QRZYMF4XNJ16bgAb9qIE5p9h9L9mN1JUD.local.variable_workflow_01SBWT4LPPTIB3IOaA2N86FO1oT7t64Jmr4$",
+                          "variable_value_new": "a"
+                        }
+                      ]
+                    },
+                    "object_type": "definition_activity"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "categories": [
+          "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ"
+        ]
+      }
+    }
+  ],
+  "atomic_workflows": [
+    "definition_workflow_01PP78DJMXS415nTjonujf03ROkr6t2PNyw",
+    "definition_workflow_01779LB6MV0P02kvka9TGV5cEam84NrCTy4",
+    "definition_workflow_01PQ89Y7GHRYN1Po7FXaw3jvoMHv5VaAlG1"
+  ]
+}
