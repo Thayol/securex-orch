@@ -1,0 +1,169 @@
+{
+  "workflow": {
+    "unique_name": "definition_workflow_01SNKRFMO5D4W0e1uZKf3dBTVHGGwlFFFk9",
+    "name": "Whitelist Possible Threat (SHA-256)",
+    "title": "Whitelist Possible Threat (SHA-256)",
+    "type": "generic.workflow",
+    "base_type": "workflow",
+    "variables": null,
+    "properties": {
+      "atomic": {
+        "is_atomic": false
+      },
+      "delete_workflow_instance": false,
+      "display_name": "Whitelist Possible Threat (SHA-256)",
+      "runtime_user": {
+        "target_default": true
+      },
+      "target": {
+        "no_target": true
+      }
+    },
+    "object_type": "definition_workflow",
+    "actions": [
+      {
+        "unique_name": "definition_activity_01SNL77M5695G0l05eSAmxCbDgjyNEcGfxL",
+        "name": "Match Regex",
+        "title": "Match Regex",
+        "type": "core.matchregex",
+        "base_type": "activity",
+        "properties": {
+          "continue_on_failure": false,
+          "display_name": "Match Regex",
+          "input_regex": "\\[hash\\](.*?)\\[\\/hash\\]",
+          "input_string": "$trigger.triggerevent_01SNKS8BHQVBN3rEUq0SfeMY3vTMBzkwX3P.common.description$",
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      },
+      {
+        "unique_name": "definition_activity_01SNL8CPDTHPL2yQah65JB0MVpWQRvAGDLo",
+        "name": "Add Row to Table",
+        "title": "Add Row to Whitelist",
+        "type": "core.addrowtotable",
+        "base_type": "activity",
+        "properties": {
+          "action_timeout": 180,
+          "continue_on_failure": false,
+          "display_name": "Add Row to Whitelist",
+          "input_table": "$global.variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd.global.variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd$",
+          "row": [
+            {
+              "key": "hash",
+              "type": "string",
+              "value": "$activity.definition_activity_01SNL77M5695G0l05eSAmxCbDgjyNEcGfxL.output.matching_strings[0]$"
+            },
+            {
+              "key": "description",
+              "type": "string",
+              "value": "$trigger.triggerevent_01SNKS8BHQVBN3rEUq0SfeMY3vTMBzkwX3P.output.task_message$"
+            }
+          ],
+          "skip_execution": false
+        },
+        "object_type": "definition_activity"
+      }
+    ],
+    "categories": [
+      "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ"
+    ]
+  },
+  "categories": {
+    "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ": {
+      "unique_name": "category_01QS01DS11DPC65yBhTpCAMYgkhp0kkxuhZ",
+      "name": "Boros Alex",
+      "title": "Boros Alex",
+      "type": "basic.category",
+      "base_type": "category",
+      "description": "Anything associated with Boros Alex's Thesis Work: Modern Automated Threat Detection and Prevention utilizing Cisco SecureX",
+      "category_type": "custom",
+      "object_type": "category"
+    }
+  },
+  "triggers": {
+    "triggerevent_01SNKS8BHQVBN3rEUq0SfeMY3vTMBzkwX3P": {
+      "workflow_id": "definition_workflow_01SNKRFMO5D4W0e1uZKf3dBTVHGGwlFFFk9",
+      "name": "Task Trigger",
+      "title": "",
+      "lowercase_name": "event.task_trigger",
+      "type": "event",
+      "base_type": "trigger",
+      "ref_id": "event_01SNKQSEIPX0L3Mb0ElZhlZEkQoE5smsKZH",
+      "version": "1.0.0",
+      "disabled": false,
+      "unique_name": "triggerevent_01SNKS8BHQVBN3rEUq0SfeMY3vTMBzkwX3P",
+      "object_type": "triggerevent"
+    }
+  },
+  "events": {
+    "event_01SNKQSEIPX0L3Mb0ElZhlZEkQoE5smsKZH": {
+      "name": "[Boros Alex] T1091 Replication Through Removable Media",
+      "title": "[Boros Alex] T1091 Replication Through Removable Media",
+      "type": "approval_task.event",
+      "base_type": "event",
+      "object_type": "event",
+      "target_id": "",
+      "webhook_id": "",
+      "version": "1.0.0",
+      "properties": {
+        "conditions": {
+          "left_operand": "$output.subject_line$",
+          "operator": "eqi",
+          "right_operand": "Possible T1091 Replication Through Removable Media"
+        },
+        "title": "[Boros Alex] T1091 Replication Through Removable Media"
+      },
+      "unique_name": "event_01SNKQSEIPX0L3Mb0ElZhlZEkQoE5smsKZH"
+    }
+  },
+  "variables": {
+    "variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd": {
+      "unique_name": "variable_01SBMZJERN1F95k9yNMjRMOYHRRfMl0fpmd",
+      "schema_id": "tabletype_01SBMYGBP1XID1ZmFTXxIUbLOqtUIYDBOhT",
+      "properties": {
+        "value": [
+          {
+            "column_data": {
+              "description": "(black.png) A fully black 1920x1080 wallpaper.",
+              "hash": "8ed817abfb94270aaf9b3f392a5927bc019277542374a9de550521e2aa34a7f6"
+            }
+          }
+        ],
+        "scope": "global",
+        "name": "Boros-T1570-Lateral-Tool-Transfer-Whitelist",
+        "type": "datatype.table",
+        "is_required": false,
+        "is_invisible": false
+      },
+      "object_type": "variable"
+    }
+  },
+  "table_types": {
+    "tabletype_01SBMYGBP1XID1ZmFTXxIUbLOqtUIYDBOhT": {
+      "unique_name": "tabletype_01SBMYGBP1XID1ZmFTXxIUbLOqtUIYDBOhT",
+      "data_type": "datatype.tabletype",
+      "display_name": "Boros-T1570-Lateral-Tool-Transfer-Whitelist",
+      "columns": [
+        {
+          "maxLength": 2048,
+          "maximum": 0,
+          "minimum": 0,
+          "name": "description",
+          "title": "Description",
+          "type": "string"
+        },
+        {
+          "is_required": true,
+          "maxLength": 64,
+          "maximum": 0,
+          "minimum": 0,
+          "name": "hash",
+          "title": "Hash",
+          "type": "string"
+        }
+      ],
+      "base_type": "datatype",
+      "object_type": "tabletype"
+    }
+  }
+}
